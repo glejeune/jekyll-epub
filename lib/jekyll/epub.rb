@@ -179,21 +179,5 @@ module Jekyll
       end
     end
     
-    def validate2( site )
-      xsd = Nokogiri::XML::Schema(open('http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd'))
-      
-      (site.posts + site.pages).each do |path|
-        file = File.join( site.dest, path.url )
-        $stderr.puts "** Validate #{file}."
-        
-        doc = Nokogiri::XML(open(file))
-        unless xsd.valid?(doc)
-          xsd.validate(doc).each do |err|
-            $stderr.puts "  - [#{err.domain}:#{err.level}:#{err.code}] in #{err.file} line:#{err.line}, column:#{err.column} : #{err}"
-          end
-        end
-      end
-    end
-    
   end
 end
