@@ -4,14 +4,22 @@ require 'uuid'
 require 'mime/types'
 
 module Jekyll
-  class StaticFile
-    def url
+  class StaticFile #:nodoc:
+    
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Give the URL of a static file
+    def url #:nodoc:
       File.join( @dir, @name )
     end
   end
   
-  class Site
-    def epub
+  class Site #:nodoc:
+    
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Same as Site::process but generate the epub. 
+    def epub #:nodoc:
       self.reset
       self.read
       
@@ -36,7 +44,11 @@ module Jekyll
       self.zip
     end
     
-    def package_epub
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Generate the specifics epub files : content.opf, toc.ncx, mimetype, 
+    # page-template.xpgt and META-INF/container.xml
+    def package_epub #:nodoc:
       files = []
       order = 0
       
@@ -80,14 +92,22 @@ module Jekyll
       write_epub_file( File.join( "META-INF", "container.xml" ) , files )
     end
     
-    def write_epub_file( tmpl, files )
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Write a specific epub file using Liquid. See Jekyll::Site::package_epub
+    def write_epub_file( tmpl, files ) #:nodoc:
       $stderr.puts "** Create #{tmpl}"
       template_file = File.join( File.expand_path( File.dirname( __FILE__ ) ), "epub", "templates", tmpl )
       template_content = Liquid::Template.parse(File.open(template_file).read).render( 'epub' => self.config['epub'], 'files' => files )
       File.open( File.join( self.dest, tmpl ), "w+" ).puts template_content
     end
   
-    def apply_epub_filters( files )
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Very simple post-filters
+    #
+    # This method need to be rewritten and add the possibility to use user's defined filters
+    def apply_epub_filters( files ) #:nodoc:
       files.each do |file|
         file.output = file.output.gsub( /(src\s*=\s*['|"])\//, '\1' )
         file.output = file.output.gsub( /(href\s*=\s*['|"])\//, '\1' )
@@ -99,7 +119,15 @@ module Jekyll
       end
     end
   
-    def zip
+    # This is a Jekyll[http://jekyllrb.com] extension
+    #
+    # Create the epub file...
+    #
+    # WARNING: does not work !!! So please generate the epub file by hand :
+    #
+    #  cd _epub/src
+    #  zip -Xr9D MyBook.epub mimetype *
+    def zip #:nodoc:
       Dir.chdir( self.dest ) do
         filename = self.config['epub']['name']
         filename += ".epub" unless File.extname(filename) == ".epub"
@@ -122,6 +150,11 @@ module Jekyll
       }
     } )
     
+    # Generate a Jekyll::Epub configuration Hash by merging the default options
+    # with anything in _epub.yml, and adding the given options on top
+    # +override+ is a Hash of config directives
+    #
+    # Returns Hash
     def self.configuration(override = {})
       # _epub.yml may override default source location, but until
       # then, we need to know where to look for _config.yml
@@ -143,9 +176,7 @@ module Jekyll
       Jekyll::Epub::DEFAULTS.deep_merge(config).deep_merge(override)
     end
     
-    def initialize
-    end
-        
+    # Generate the epub! All in one!
     def create
       options = Jekyll::Epub.configuration
       site = Jekyll::Site.new(options)
@@ -156,6 +187,14 @@ module Jekyll
       end
     end
     
+    # A tiny XHTML validator.
+    # 
+    # If you want to validate your xhtml files, juste add 
+    #
+    #  epub:
+    #    validate: true
+    #
+    # in your _epub.yml file.
     def validate( site )
       begin
         require 'xml/libxml'

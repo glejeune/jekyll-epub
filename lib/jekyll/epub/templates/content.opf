@@ -20,7 +20,7 @@
       <dc:contributor>{{epub.contributor}}</dc:contributor>
       <dc:publisher>{{epub.publisher}}</dc:publisher>
       <dc:date xsi:type="dcterms:W3CDTF">{{epub.date}}</dc:date>
-      <dc:rights>{{epub.right}}</dc:rights>
+      <dc:rights>{{epub.rights}}</dc:rights>
       <dc:type>{{epub.type}}</dc:type>
       <dc:format>{{epub.format}}</dc:format>
       <dc:source>{{epub.source}}</dc:source>

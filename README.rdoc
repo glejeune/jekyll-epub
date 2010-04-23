@@ -1,6 +1,10 @@
 = jekyll-epub
 
-Description goes here.
+Create an eBook (epub) of your Jekyll blog
+
+== How To
+
+First, you need to create your own Jekyll Blog ;)
 
 == Note on Patches/Pull Requests
  
