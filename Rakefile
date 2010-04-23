@@ -10,8 +10,12 @@ begin
     gem.email = "gregoire.lejeune@free.fr"
     gem.homepage = "http://github.com/glejeune/jekyll-epub"
     gem.authors = ["Gregoire Lejeune"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+
+    gem.add_dependency 'mime-types', ">= 0"
+    gem.add_dependency 'uuid', ">= 0"
+    gem.add_dependency 'jekyll', ">= 0"
+    
+    gem.add_development_dependency "shoulda", ">= 0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
