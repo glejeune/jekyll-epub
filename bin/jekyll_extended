@@ -14,7 +14,11 @@ jekyll_path = Gem.bin_path('jekyll', 'jekyll', version)
 exec_path = File.join( Dir.pwd, "_extensions" )
 
 if File.directory?( exec_path )
-	$stderr.puts "* Load extensions from #{exec_path}"
+	$stderr.puts "* Load extensions from #{exec_path} :"
+	Dir.glob( File.join( exec_path, "**", "*.rb" ) ) do |ext|
+		$stderr.puts "  - #{ext}"
+		load ext
+	end
 end
 
 load jekyll_path
