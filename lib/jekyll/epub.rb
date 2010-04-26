@@ -14,11 +14,8 @@ module Jekyll
     end
   end
   
-  class Site #:nodoc:
-    
-    attr_accessor :all
-    
-    def get_all_pages_order
+  class Site #:nodoc:    
+    def all
       if self.config["epub"]["pages-order"]
         pages + posts
       else
@@ -59,8 +56,6 @@ module Jekyll
     # Generate the specifics epub files : content.opf, toc.ncx, mimetype, 
     # page-template.xpgt and META-INF/container.xml
     def package_epub #:nodoc:
-      @all = get_all_pages_order
-      
       files = []
       order = 0
       
