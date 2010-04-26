@@ -2,10 +2,10 @@ require 'rubygems'
 require 'jekyll'
 require 'uuid'
 require 'mime/types'
+require 'jekyll/tags/epub'
 
 module Jekyll
   class StaticFile #:nodoc:
-    
     # This is a Jekyll[http://jekyllrb.com] extension
     #
     # Give the URL of a static file
@@ -15,7 +15,6 @@ module Jekyll
   end
   
   class Site #:nodoc:
-    
     # This is a Jekyll[http://jekyllrb.com] extension
     #
     # Same as Site::process but generate the epub. 
@@ -52,8 +51,17 @@ module Jekyll
       files = []
       order = 0
       
+      # Check for cover image
+      if self.config["epub"]["cover-image"]
+        self.config["epub"]["cover"] = {
+          "image" => self.config["epub"]["cover-image"],
+          "mime" => MIME::Types.type_for( self.config["epub"]["cover-image"] ).to_s
+        }
+      end
+      
       (posts + pages + static_files).each do |p|
         url = p.url.gsub( /^\//, "" )
+        next if url == self.config["epub"]["cover-image"]
         mime = MIME::Types.type_for( url ).to_s
         mime = "application/xhtml+xml" if mime == "text/html"     
         next if self.config['exclude'].include?(File.basename( url ))
@@ -90,6 +98,9 @@ module Jekyll
       write_epub_file( "mimetype", files )
       write_epub_file( "page-template.xpgt", files )
       write_epub_file( File.join( "META-INF", "container.xml" ) , files )
+      if self.config["epub"]["cover-image"]
+        write_epub_file( "cover.xhtml", files )
+      end
     end
     
     # This is a Jekyll[http://jekyllrb.com] extension
@@ -179,6 +190,7 @@ module Jekyll
     # Generate the epub! All in one!
     def create
       options = Jekyll::Epub.configuration
+      
       site = Jekyll::Site.new(options)
       site.epub
       

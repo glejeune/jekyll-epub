@@ -4,7 +4,66 @@ Create an eBook (epub) of your Jekyll blog
 
 == How To
 
-First, you need to create your own Jekyll Blog ;)
+=== Create your blog ;)
+
+First, you need to create your own Jekyll Blog ;) Please, refer to the {Jekyll documentation}[http://wiki.github.com/mojombo/jekyll/].
+
+=== Configuration
+
+Then, you must add a configuration file : <tt>_epub.yml</tt>. This file is pretty similar to the Jekyll configuration file (<tt>_config.yml</tt>) except that's you must add in some specifics entries. This entries are in the mapping <tt>epub</tt>:
+
+<tt>_epub.yml</tt> :
+
+  epub:
+    name: "My Jekyll Blog"
+    lang: en
+    identifier: my_blog.example.com-123456
+
+Note that's in the file, you can also use all the {Jekyll configuration options}[http://wiki.github.com/mojombo/jekyll/configuration]. However, it is prudent not to change the <tt>permalink</tt> option, or you may spend a lot of time to set the proper access to resources (images, CSS, ...). You have been warned;)
+
+Here is the list of options :
+
+* <tt>name:</tt> <tt>String</tt> : The name of your book. This is a mandatory option.
+* <tt>title:</tt> <tt>String</tt> : The title of your book. This is a mandatory option.
+* <tt>identifier:</tt> <tt>String</tt> : A unique identifier for your book. If you have one, you can use an ISBN. If not given, Jekyll-epub will generate an UUID for you.
+* <tt>subject:</tt> <tt>String</tt> : The subject of the book.
+* <tt>description:</tt> <tt>String</tt> : An abstract of your book.
+* <tt>relation:</tt> <tt>String</tt> : 
+* <tt>creator:</tt> <tt>String</tt> : The identity of the creator of the book. 
+* <tt>contributor:</tt> <tt>String</tt> : The identity of the contributor of the book.
+* <tt>publisher:</tt> <tt>String</tt> : The identity of the publisher.
+* <tt>date:</tt> <tt>Date</tt> : You really want to know ;) 
+* <tt>rights:</tt> <tt>String</tt> : The copyright of your book.
+* <tt>type:</tt> <tt>String</tt> : The type of the book (I mean the kind)
+* <tt>format:</tt> <tt>String</tt> : Some informations about the book format (The physical format)
+* <tt>source:</tt> <tt>String</tt> : Information about the source of the book.
+* <tt>coverage:</tt> <tt>String</tt> : Provides information on the spatial and/or time relevance of the book.
+* <tt>cover-image:</tt> <tt>String</tt> : The image to use for the cover of the book (i use a 540 × 648 pixels image)
+* <tt>pages:</tt> <tt>[page | post]</tt> : A list of pages and/or posts you want to order at the begenning of the book.
+
+=== Layout
+
+If you want to use a special layout for your book, you can use the <tt>epub:</tt> mapping in the header of your pages, posts, layouts. This mapping is similar to the <tt>layout:</tt> mapping except that's it is specific for the epub generation. In this example :
+
+  ---
+  epub: my_ebook
+  layout: post
+  ---
+  <p>This is the content of my post...</p>
+
+When we generate the epub, Jekyll-epub will use the layout <tt>my_ebook</tt>.
+
+=== Liquid extension
+
+You can also use two Liquid extensions :
+
+  {% epub %}
+  ... This will only be display in the epub ...
+  {% endepub %}
+
+  {% noepub %}
+  ... This will not be display in the epub ...
+  {% endnoepub %}
 
 == Note on Patches/Pull Requests
  

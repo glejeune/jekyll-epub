@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Gregoire Lejeune"]
-  s.date = %q{2010-04-23}
+  s.date = %q{2010-04-26}
   s.description = %q{Create an eBook (epub) of your Jekyll blog}
   s.email = %q{gregoire.lejeune@free.fr}
   s.extra_rdoc_files = [
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "jekyll-epub.gemspec",
      "lib/jekyll/epub.rb",
      "lib/jekyll/epub/dtd/xhtml-lat1.ent",
      "lib/jekyll/epub/dtd/xhtml-special.ent",
