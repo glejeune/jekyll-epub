@@ -1,0 +1,20 @@
+#/usr/bin/env ruby
+
+require 'rubygems'
+
+version = ">= 0"
+
+if ARGV.first =~ /^_(.*)_$/ and Gem::Version.correct? $1 then
+  version = $1
+  ARGV.shift
+end
+
+gem 'jekyll', version
+jekyll_path = Gem.bin_path('jekyll', 'jekyll', version)
+exec_path = File.join( Dir.pwd, "_extensions" )
+
+if File.directory?( exec_path )
+	$stderr.puts "* Load extensions from #{exec_path}"
+end
+
+load jekyll_path
