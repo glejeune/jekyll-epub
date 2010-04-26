@@ -15,6 +15,17 @@ module Jekyll
   end
   
   class Site #:nodoc:
+    
+    attr_accessor :all
+    
+    def get_all_pages_order
+      if self.config["epub"]["pages-order"]
+        pages + posts
+      else
+        posts + pages
+      end
+    end
+    
     # This is a Jekyll[http://jekyllrb.com] extension
     #
     # Same as Site::process but generate the epub. 
@@ -48,6 +59,8 @@ module Jekyll
     # Generate the specifics epub files : content.opf, toc.ncx, mimetype, 
     # page-template.xpgt and META-INF/container.xml
     def package_epub #:nodoc:
+      @all = get_all_pages_order
+      
       files = []
       order = 0
       
@@ -59,7 +72,7 @@ module Jekyll
         }
       end
       
-      (posts + pages + static_files).each do |p|
+      (all + static_files).each do |p|
         url = p.url.gsub( /^\//, "" )
         next if url == self.config["epub"]["cover-image"]
         mime = MIME::Types.type_for( url ).to_s
