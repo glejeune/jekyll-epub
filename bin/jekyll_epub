@@ -42,7 +42,7 @@ opts = OptionParser.new do |opts|
     options['gen_epub'] = false
   end
 
-  opts.on("--no-epub", "Do not generate epub") do
+  opts.on("--no-site", "Do not generate site") do
     options['gen_site'] = false
   end
 

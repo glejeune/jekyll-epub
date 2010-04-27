@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "bin/jekyll_epub",
      "jekyll-epub.gemspec",
      "lib/jekyll/epub.rb",
      "lib/jekyll/epub/dtd/xhtml-lat1.ent",
