@@ -18,7 +18,7 @@ module Jekyll
       end
       
       def epub( key, value )
-        @_epub[key.to_s] = value
+        @_epub["epub"][key.to_s] = value
       end
       
       def web( key, value )
