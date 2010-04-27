@@ -69,16 +69,18 @@ Since I have add those two extensions, if you want to use them, you also need on
 
 ==== Use <tt>jekyll_extended</tt>
 
+0. Install jekyll-extended
+
+  sudo gem install jekyll-extended
+
 1. Add a directory named <tt>_extensions</tt> in your root's Jekyll blog directory
 2. Create a Ruby file in this directory and put this code in :
 
   require 'jekyll/tags/epub'
 
-3. Run <tt>jekyll_extended</tt>(*) instead of <tt>jekyll</tt>
+3. Run <tt>jekyll_extended</tt> instead of <tt>jekyll</tt>
 
 Otherwise, you will not be able to generate your (web) site.
-
-(*) At this time, <tt>jekyll_extended</tt> is included in the <tt>Jekyll-epub</tt> package. I'll probably create a new gem for it in the future.
 
 ==== Use Rack tasks
 

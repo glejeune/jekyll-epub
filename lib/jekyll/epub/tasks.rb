@@ -35,8 +35,8 @@ module Jekyll
         
         desc "Build site"
         task :site do
-          source      = options['source']
-          destination = options['destination']
+          source      = @web_override['source']
+          destination = @web_override['destination']
           site = Jekyll::Site.new(@web_override)
           
           puts "Building site: #{source} -> #{destination}"
@@ -44,17 +44,16 @@ module Jekyll
           puts "Successfully generated site: #{source} -> #{destination}"
         end
         
-        desc "Build and serve site on localhost with port #{@web_override["serve_port"]}"
-        tasks :serve => [:site] do
+        desc "Serve site on localhost with port #{@web_override["serve_port"]}"
+        task :serve do
           require 'webrick'
-          include WEBrick
           
           FileUtils.mkdir_p( @web_override['destination'] )
           
           mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
           mime_types.store 'js', 'application/javascript'
           
-          s = HTTPServer.new(
+          s = WEBrick::HTTPServer.new(
             :Port            => @web_override['server_port'],
             :DocumentRoot    => @web_override['destination'],
             :MimeTypes       => mime_types

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Gregoire Lejeune"]
-  s.date = %q{2010-04-26}
+  s.date = %q{2010-04-27}
   s.default_executable = %q{jekyll_extended}
   s.description = %q{Create an eBook (epub) of your Jekyll blog}
   s.email = %q{gregoire.lejeune@free.fr}
@@ -32,12 +32,15 @@ Gem::Specification.new do |s|
      "lib/jekyll/epub/dtd/xhtml-special.ent",
      "lib/jekyll/epub/dtd/xhtml-symbol.ent",
      "lib/jekyll/epub/dtd/xhtml1-strict.dtd",
+     "lib/jekyll/epub/tasks.rb",
      "lib/jekyll/epub/templates/META-INF/container.xml",
      "lib/jekyll/epub/templates/content.opf",
      "lib/jekyll/epub/templates/cover.xhtml",
      "lib/jekyll/epub/templates/mimetype",
      "lib/jekyll/epub/templates/page-template.xpgt",
      "lib/jekyll/epub/templates/toc.ncx",
+     "lib/jekyll/extensions.rb",
+     "lib/jekyll/extensions/aop.rb",
      "lib/jekyll/tags/epub.rb",
      "test/helper.rb",
      "test/test_jekyll-epub.rb"

@@ -23,7 +23,7 @@ module Jekyll
     end
     
     def render(context)
-      if context.registers[:site].config
+      if context.registers[:site].config["epub"]
         ""
       else
         super
