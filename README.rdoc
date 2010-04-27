@@ -65,7 +65,9 @@ You can also use two Liquid extensions :
   ... This will not be display in the epub ...
   {% endnoepub %}
 
-Since I have add those two extensions, if you want to use them, you also need to :
+Since I have add those two extensions, if you want to use them, you also need one of the two following solution
+
+==== Use <tt>jekyll_extended</tt>
 
 1. Add a directory named <tt>_extensions</tt> in your root's Jekyll blog directory
 2. Create a Ruby file in this directory and put this code in :
@@ -74,7 +76,22 @@ Since I have add those two extensions, if you want to use them, you also need to
 
 3. Run <tt>jekyll_extended</tt>(*) instead of <tt>jekyll</tt>
 
+Otherwise, you will not be able to generate your (web) site.
+
 (*) At this time, <tt>jekyll_extended</tt> is included in the <tt>Jekyll-epub</tt> package. I'll probably create a new gem for it in the future.
+
+==== Use Rack tasks
+
+1. Create a Rakefile in your root's Jekyll blog directory
+2. Add the following code in your Rakefile
+
+	require 'jekyll/epub/tasks'
+	Jekyll::Epub::Tasks do
+		web :serve_port, 4000
+		epub :destination, "_epub"
+	end
+
+3. Use <tt>rake epub</tt> to generate the epub, use <tt>rake site</tt> to generate the website, use <tt>rake serve</tt> to serve the website.
 
 == Note on Patches/Pull Requests
  

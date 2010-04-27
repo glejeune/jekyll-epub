@@ -11,17 +11,9 @@ end
 
 gem 'jekyll', version
 jekyll_path = Gem.bin_path('jekyll', 'jekyll', version)
-exec_path = File.join( Dir.pwd, "_extensions" )
 
 require 'jekyll'
-
-if File.directory?( exec_path )
-	$stderr.puts "* Load extensions :"
-	Dir.glob( File.join( exec_path, "**", "*.rb" ) ) do |ext|
-		$stderr.puts "  - #{File.basename(ext)}"
-		require ext
-	end
-	puts
-end
+require 'jekyll/extensions'
+load_jekyll_extensions
 
 load jekyll_path

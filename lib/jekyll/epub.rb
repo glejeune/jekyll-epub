@@ -196,8 +196,8 @@ module Jekyll
     end
     
     # Generate the epub! All in one!
-    def create
-      options = Jekyll::Epub.configuration
+    def create( override )
+      options = Jekyll::Epub.configuration( override )
       
       site = Jekyll::Site.new(options)
       site.epub
