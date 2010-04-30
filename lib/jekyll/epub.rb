@@ -17,10 +17,46 @@ module Jekyll
   class Site #:nodoc:    
     def all
       if self.config["epub"]["pages-order"]
-        pages + posts
+        self.create_order( pages.clone, posts.clone, self.config["epub"]["pages-order"], :url )
       else
         posts + pages
       end
+    end
+    
+    def get_item( item, method, posts, pages ) #:nodoc:
+      _out = []
+
+      posts.each do |p|
+        if p.send(method).gsub( /^\//, "" ) == item
+          _out << posts.delete(p)
+        end
+      end
+
+      pages.each do |p|
+        if p.send(method).gsub( /^\//, "" ) == item
+          _out << pages.delete(p)
+        end
+      end
+
+      return _out, posts, pages
+    end
+
+    def create_order( pages, posts, order, method ) #:nodoc:
+      _result = []
+      _order = {}
+      order.each do |item|
+        if item.class == Symbol
+          _order[item] = eval(item.to_s)
+        else
+          _order[item], posts, pages = get_item( item, method, posts, pages )
+        end
+      end
+
+      order.each do |item|
+        _result = _result + _order[item]
+      end
+
+      return _result
     end
     
     # This is a Jekyll[http://jekyllrb.com] extension
