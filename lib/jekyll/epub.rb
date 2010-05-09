@@ -177,17 +177,13 @@ module Jekyll
     # This is a Jekyll[http://jekyllrb.com] extension
     #
     # Create the epub file...
-    #
-    # WARNING: does not work !!! So please generate the epub file by hand :
-    #
-    #  cd _epub/src
-    #  zip -Xr9D MyBook.epub mimetype *
     def zip #:nodoc:
       Dir.chdir( self.dest ) do
         filename = self.config['epub']['name']
         filename += ".epub" unless File.extname(filename) == ".epub"
         $stderr.puts "** Create epub file #{filename} in #{Dir.pwd}..."
-        %x(zip -Xr9D \"#{filename}\" mimetype *)
+        %x(zip -X9 \"#{filename}\" mimetype)
+        %x(zip -Xr9D \"#{filename}\" * -xi mimetype)
       end
     end
   end
