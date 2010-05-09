@@ -86,7 +86,7 @@ See <tt>jekyll_epub --help</tt> for more information
     epub :destination, "_epub"
   end
 
-3. Use <tt>rake epub</tt> to generate the epub, use <tt>rake site</tt> to generate the website, use <tt>rake serve</tt> to serve the website.
+Use <tt>rake epub</tt> to generate the epub, use <tt>rake site</tt> to generate the website, use <tt>rake serve</tt> to serve the website.
 
 == Note on Patches/Pull Requests
  
