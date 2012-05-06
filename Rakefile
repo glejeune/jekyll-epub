@@ -14,7 +14,8 @@ begin
     gem.add_dependency 'mime-types', ">= 0"
     gem.add_dependency 'uuid', ">= 0"
     gem.add_dependency 'jekyll', ">= 0"
-    
+    gem.add_dependency 'libxml-ruby', ">= 0"
+
     gem.add_development_dependency "shoulda", ">= 0"
   end
   Jeweler::GemcutterTasks.new
@@ -46,7 +47,7 @@ task :test => :check_dependencies
 
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
