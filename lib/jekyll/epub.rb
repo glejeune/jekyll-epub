@@ -108,7 +108,7 @@ module Jekyll
         next if url == self.config["epub"]["cover-image"]
         mime = MIME::Types.type_for( url ).to_s
         mime = "application/xhtml+xml" if mime == "text/html"     
-        next if self.config['exclude'].include?(File.basename( url ))
+        next if self.config['exclude'] and self.config['exclude'].include?(File.basename( url ))
         
         if mime == "" then
           $stderr.puts "** Ignore file #{url}, unknown mime type!"
