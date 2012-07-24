@@ -75,7 +75,7 @@ Otherwise, you will not be able to generate your (web) site.
 
 See <tt>jekyll_epub --help</tt> for more information
 
-==== Use Rack tasks
+==== Use Rake tasks
 
 1. Create a Rakefile in your root's Jekyll blog directory
 2. Add the following code in your Rakefile
