@@ -81,7 +81,7 @@ See <tt>jekyll_epub --help</tt> for more information
 2. Add the following code in your Rakefile
 
   require 'jekyll/epub/tasks'
-  Jekyll::Epub::Tasks do
+  Jekyll::Epub::Tasks.new do
     web :serve_port, 4000
     epub :destination, "_epub"
   end
